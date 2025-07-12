@@ -14,11 +14,9 @@ dotenv.config();
 
 const app = express();
 
-// Configure Multer for file uploads
 const uploadDir = path.join(__dirname, "../Uploads");
 if (!fs.existsSync(uploadDir)) {
   fs.mkdirSync(uploadDir, { recursive: true });
-  console.log(`Created Uploads directory at ${uploadDir}`);
 }
 
 const storage = multer.diskStorage({
@@ -36,7 +34,6 @@ app.use(cors());
 app.use(express.json());
 app.use("/Uploads", express.static(uploadDir));
 
-const isProduction = process.env.NODE_ENV === "production";
 
 if (!process.env.NODE_ENV) {
   console.warn("NODE_ENV is not set. Defaulting to development.");

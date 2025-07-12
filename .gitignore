@@ -29,3 +29,5 @@ build/
 
 *.sql
 *.dump
+
+dist

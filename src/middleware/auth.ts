@@ -9,15 +9,12 @@ export const authMiddleware = async (
   try {
     const authHeader = req.headers.authorization;
     if (!authHeader || !authHeader.startsWith("Bearer ")) {
-      console.log("Missing or invalid Authorization header");
       return res.status(401).json({ message: "Unauthorized" });
     }
 
     const token = authHeader.split(" ")[1];
-    console.log("Verifying token:", token);
     const decoded = verifyToken(token);
     req.user = { id: decoded.userId };
-    console.log("User authenticated:", req.user.id);
     next();
   } catch (error) {
     console.error("Auth middleware error:", error);
